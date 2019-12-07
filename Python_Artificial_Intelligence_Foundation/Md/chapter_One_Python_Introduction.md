@@ -1,3 +1,4 @@
+#coding:utf-8
 #7、海龟绘图坐标系问题
 import  turtle as t  
 t.showturtle()  #显示箭头  
