@@ -310,10 +310,10 @@ dc.grid(row=16, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
 varde = tk.StringVar()
 Entry_de = ttk.Combobox(frameCloud, width=12,textvariable=varde)
-Entry_de['values']=("HLS","HOLO",)
+Entry_de['values']=("HLS","HOLO","RTSP")
 Entry_de.grid(row=15, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
 Entry_de.current("0")
-de = tk.Label(frameCloud, text='playback_protocol:',height=1,width=18,anchor='ne')
+de = tk.Label(frameCloud, text='protocol:',height=1,width=18,anchor='ne')
 de.grid(row=15, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
 vardf = tk.StringVar()
