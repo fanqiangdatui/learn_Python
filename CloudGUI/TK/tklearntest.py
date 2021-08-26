@@ -280,8 +280,8 @@ sd.grid(row=4, columnspan=4,sticky=tk.E + tk.W, padx=3, pady=3)
 varca = tk.StringVar()
 Entry_ca = tk.Entry(frameCloud, textvariable=varca, show=None, font=('微软雅黑', 8))
 Entry_ca.grid(row=11, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
-varca.set("HLS URL")
-ca = tk.Label(frameCloud, text='生成的HLS_URL:',height=1,width=18,anchor='ne')
+varca.set("live URL")
+ca = tk.Label(frameCloud, text='生成的URL:',height=1,width=18,anchor='ne')
 ca.grid(row=11, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
 varcd = tk.StringVar()
@@ -326,7 +326,7 @@ df.grid(row=14, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 vardg = tk.StringVar()
 Entry_dg = tk.Entry(frameCloud, textvariable=vardg, show=None, font=('微软雅黑', 7))
 Entry_dg.grid(row=13, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
-vardg.set("21024125019SM6000630")
+vardg.set("21024125399SM6003512")
 dg = tk.Label(frameCloud, text='device_id:',height=1,width=18,anchor='ne')
 dg.grid(row=13, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
@@ -368,7 +368,7 @@ def GetHLS():
     cloud.CLOUD().GetHLSHTML(Entry_dc.get(),channels)
     varca.set(res)
 
-cb = ttk.Button(frameCloud, text="获取HLS实况", command=GetHLS)
+cb = ttk.Button(frameCloud, text="获取实况URL", command=GetHLS)
 cb.grid(row=12, columnspan=4,sticky=tk.E + tk.W, padx=3, pady=3)
 
 def GetPlayBackHLS():
