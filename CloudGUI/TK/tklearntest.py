@@ -280,8 +280,8 @@ sd.grid(row=4, columnspan=4,sticky=tk.E + tk.W, padx=3, pady=3)
 varca = tk.StringVar()
 Entry_ca = tk.Entry(frameCloud, textvariable=varca, show=None, font=('微软雅黑', 8))
 Entry_ca.grid(row=11, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
-varca.set("live URL")
-ca = tk.Label(frameCloud, text='生成的URL:',height=1,width=18,anchor='ne')
+varca.set("message")
+ca = tk.Label(frameCloud, text='执行结果:',height=1,width=18,anchor='ne')
 ca.grid(row=11, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
 varcd = tk.StringVar()
@@ -293,16 +293,9 @@ cd = tk.Label(frameCloud, text='stream_type:',height=1,width=18,anchor='ne')
 cd.grid(row=9, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
 
-varda = tk.StringVar()
-Entry_da = tk.Entry(frameCloud, textvariable=varda, show=None, font=('微软雅黑', 8))
-Entry_da.grid(row=20, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
-varda.set("HLS 回看 URL")
-da = tk.Label(frameCloud, text='生成的HLS回看URL:',height=1,width=18,anchor='ne')
-da.grid(row=20, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
-
 vardc = tk.StringVar()
 Entry_dc = ttk.Combobox(frameCloud, width=12,textvariable=vardc)
-Entry_dc['values']=("北京四","上海一",)
+Entry_dc['values']=("北京四","上海一","乌兰")
 Entry_dc.grid(row=16, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
 Entry_dc.current("1")
 dc = tk.Label(frameCloud, text='环境选择:',height=1,width=18,anchor='ne')
@@ -310,23 +303,25 @@ dc.grid(row=16, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
 varde = tk.StringVar()
 Entry_de = ttk.Combobox(frameCloud, width=12,textvariable=varde)
-Entry_de['values']=("HLS","HOLO","RTSP")
+Entry_de['values']=("HLS","HOLO","RTSP","RTSPstatic")
 Entry_de.grid(row=15, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
-Entry_de.current("0")
+Entry_de.current("2")
 de = tk.Label(frameCloud, text='protocol:',height=1,width=18,anchor='ne')
 de.grid(row=15, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
 vardf = tk.StringVar()
-Entry_df = tk.Entry(frameCloud, textvariable=vardf, show=None, font=('微软雅黑', 7))
+Entry_df = ttk.Combobox(frameCloud, width=12,textvariable=vardf,font=('微软雅黑', 6))
+Entry_df['values']=("0","34020012131310000001")
 Entry_df.grid(row=14, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
-vardf.set("0")
+Entry_df.current("0")
 df = tk.Label(frameCloud, text='channel_id:',height=1,width=18,anchor='ne')
 df.grid(row=14, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
 vardg = tk.StringVar()
-Entry_dg = tk.Entry(frameCloud, textvariable=vardg, show=None, font=('微软雅黑', 7))
+Entry_dg = ttk.Combobox(frameCloud, textvariable=vardg, show=None, font=('微软雅黑', 6))
+Entry_dg['values']=("21024125399SM6003512","34020012131320000001")
 Entry_dg.grid(row=13, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
-vardg.set("21024125399SM6003512")
+Entry_dg.current("0")
 dg = tk.Label(frameCloud, text='device_id:',height=1,width=18,anchor='ne')
 dg.grid(row=13, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
@@ -368,8 +363,9 @@ def GetHLS():
     cloud.CLOUD().GetHLSHTML(Entry_dc.get(),channels)
     varca.set(res)
 
-cb = ttk.Button(frameCloud, text="获取实况URL", command=GetHLS)
-cb.grid(row=12, columnspan=4,sticky=tk.E + tk.W, padx=3, pady=3)
+
+cb = ttk.Button(frameCloud, text="获取实况URL", command=lambda:[GetHLS()])
+cb.grid(row=21, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
 def GetPlayBackHLS():
     device_id=Entry_dg.get()
@@ -388,9 +384,9 @@ def GetPlayBackHLS():
     ]
     res = cloud.CLOUD().GetPlayBackHLSURL(Entry_dc.get(),channels)
     cloud.CLOUD().GetPlayBackHLSHTML(Entry_dc.get(),channels)
-    varda.set(res)
-ce = ttk.Button(frameCloud, text="获取HLS回看", command=GetPlayBackHLS)
-ce.grid(row=21, columnspan=4,sticky=tk.E + tk.W, padx=3, pady=3)
+    varca.set(res)
+ce = ttk.Button(frameCloud, text="获取录像URL", command=GetPlayBackHLS)
+ce.grid(row=21, column=1,sticky=tk.E + tk.W, padx=3, pady=3)
 
 
 Textea = tk.Text(frameCloud2,width=50,height=30,font=('微软雅黑', 7))

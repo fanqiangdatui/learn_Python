@@ -11,14 +11,20 @@ import urllib
 ssl._create_default_https_context = ssl._create_unverified_context
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 env={"北京四":{"ak": "102559065820210301100052",
-    "sk": "1025590658202103011000526d4ae1087cf14e008fbed45818411c87",
-    "eudms":"https://api-ivm.myhuaweicloud.com",
-    "userid":"85826388920210609172648"},
+            "sk": "1025590658202103011000526d4ae1087cf14e008fbed45818411c87",
+            "eudms":"https://api-ivm.myhuaweicloud.com",
+            "userid":"85826388920210609172648",
+            "apig": "https://api-ivm.myhuaweicloud.com"},
      "上海一":{"ak": "df53000fc713409545fe00c2fcff4b2d",
-    "sk": "61ba0eb195d06579e3978b60cce1414d2929615845a4c422128288c3ab5036dc",
-    "eudms":"https://121.36.193.23:443",
-    "userid":"31092853220210609152250"
-                      }
+            "sk": "61ba0eb195d06579e3978b60cce1414d2929615845a4c422128288c3ab5036dc",
+            "eudms":"https://121.36.193.23:443",
+            "userid":"31092853220210609152250",
+            "apig": "https://api-ivm.myhuaweicloud.com"},
+     "乌兰":{"ak": "bc72cb4391957521bc9b05252ef6ed0b",
+            "sk": "58836ff3a264b5470bf0c1643b71a3d1c9b4319ae3033c72b12aa0fe80c6363a",
+            "eudms":"http://100.94.174.66:18090",
+            "userid":"64797698520210602101823",
+            "apig": ""}
      }
 class CLOUD():
 
@@ -38,7 +44,10 @@ class CLOUD():
         access_token=CLOUD().GetToken(envType)
 
         url = env[envType]["eudms"]+"/v1/"+env[envType]["userid"]+"/devices/channels/cloud-live/url"
-
+        isstatic=0
+        if channels[0]['live_protocol']=="RTSPstatic":
+            isstatic=1
+            channels[0]['live_protocol'] = "RTSP"
         payload = json.dumps({
           "channels": channels
         })
@@ -46,13 +55,19 @@ class CLOUD():
           'Access-Token': access_token,
           'Content-Type': 'application/json'
         }
-        print(type(payload))
+        print("payload",payload,type(payload))
         response = requests.post(url, headers=headers, data=payload,verify=False)
         responsetext = json.loads(response.text)
         jr = json.dumps(json.loads(response.text), indent=4, sort_keys=False, ensure_ascii=False)
         print('************json.dumps.response.text:', jr, type(jr), type(responsetext))
-        HLSURL = responsetext["channels"][0]["live_url"]
-        print(HLSURL)
+        if responsetext["channels"][0]["result"]["msg"]== "Success":
+            HLSURL = responsetext["channels"][0]["live_url"]
+            if isstatic==1:
+                HLSURL="rtsp://13709641419:Qaz12580@"+HLSURL[7:]
+        else:
+            HLSURL = responsetext["channels"][0]["result"]["msg"]
+
+        print("HLSURL",HLSURL)
         return HLSURL
 
     def GetHLSHTML(self,envType,channels):
@@ -84,7 +99,7 @@ class CLOUD():
 </html>'''%HLSURL
         print(HLSHTML)
         path=os.getcwd()
-        path=path+"\\HLSHTML.html"
+        path=path+"\\live.html"
         print(path)
         if os.path.exists(path):
             os.remove(path)
@@ -143,7 +158,7 @@ class CLOUD():
 </html>'''%PlayBackHLSURL
         print("PlayBackHLSURL:",PlayBackHLSURL)
         path=os.getcwd()
-        path=path+"\\PlayBackHLSHTML.html"
+        path=path+"\\record.html"
         print(path)
         if os.path.exists(path):
             os.remove(path)
