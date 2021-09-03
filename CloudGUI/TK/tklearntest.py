@@ -311,7 +311,11 @@ de.grid(row=15, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
 vardf = tk.StringVar()
 Entry_df = ttk.Combobox(frameCloud, width=12,textvariable=vardf,font=('微软雅黑', 6))
-Entry_df['values']=("0","34020012131310000001")
+Entry_df['values']=("34020001001310000001",
+                    "34020001001310000002",
+                    "34020001001310000003",
+                    "34020001001310000004"
+                    "0","1","2","3",)
 Entry_df.grid(row=14, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
 Entry_df.current("0")
 df = tk.Label(frameCloud, text='channel_id:',height=1,width=18,anchor='ne')
@@ -319,7 +323,17 @@ df.grid(row=14, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
 vardg = tk.StringVar()
 Entry_dg = ttk.Combobox(frameCloud, textvariable=vardg, show=None, font=('微软雅黑', 6))
-Entry_dg['values']=("21024125399SM6003512","34020012131320000001")
+Entry_dg['values']=("21012345671321234567",
+                    "21212345671321234567",
+                    "21312345671321234567",
+                    "21512345671181234567",
+                    "21612345671181234567",
+                    "21024125399SM6003512",
+                    "2102412969WLL40000012",
+                    "2198061243WLL3000239",
+                    "21512345671181234567",
+                    "21612345671181234567"
+                    )
 Entry_dg.grid(row=13, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
 Entry_dg.current("0")
 dg = tk.Label(frameCloud, text='device_id:',height=1,width=18,anchor='ne')
