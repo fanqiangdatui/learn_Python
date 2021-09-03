@@ -314,7 +314,7 @@ Entry_df = ttk.Combobox(frameCloud, width=12,textvariable=vardf,font=('微软雅
 Entry_df['values']=("34020001001310000001",
                     "34020001001310000002",
                     "34020001001310000003",
-                    "34020001001310000004"
+                    "34020001001310000004",
                     "0","1","2","3",)
 Entry_df.grid(row=14, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
 Entry_df.current("0")
