@@ -323,14 +323,14 @@ df.grid(row=14, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
 vardg = tk.StringVar()
 Entry_dg = ttk.Combobox(frameCloud, width=24,textvariable=vardg, show=None, font=('微软雅黑', 8))
-Entry_dg['values']=("华为SDC动检SD好望211,21024125399SM6003512",
-                    "海康SDC球机SD国标212,21212345671321234567",
-                    "华为SDC拾音喇叭SD好望213,2102412969WLL40000012",
-                    "华为SDC拾音喇叭SD国标213,21312345671321234567",
-                    "海康SDC拾音喇叭国标214,21412345671321234567"
-                    "海康NVR2T国标215,21512345671181234567",
-                    "大华NVR8T国标216,21612345671181234567",
-                    "华为NVR3T好望217,2198061243WLL3000239",
+Entry_dg['values']=("211好望华为SDC动检SD,21024125399SM6003512",
+                    "212国标海康SDC球机SD,21212345671321234567",
+                    "213好望华为SDC拾音喇叭SD,2102412969WLL40000012",
+                    "213国标华为SDC拾音喇叭SD,21312345671321234567",
+                    "214国标海康SDC拾音喇叭,21412345671321234567",
+                    "215国标海康NVR2T,21512345671181234567",
+                    "216国标大华NVR8T,21612345671181234567",
+                    "217好望华为NVR3T,2198061243WLL3000239",
                     )
 Entry_dg.grid(row=13, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
 Entry_dg.current("0")
