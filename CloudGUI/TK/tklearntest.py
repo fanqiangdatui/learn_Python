@@ -303,7 +303,7 @@ dc.grid(row=16, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
 varde = tk.StringVar()
 Entry_de = ttk.Combobox(frameCloud, width=12,textvariable=varde)
-Entry_de['values']=("HLS","HLS_DEV","HOLO","RTSP","RTSPstatic","RTSP_DEV")
+Entry_de['values']=("HLS","HLS_DEV","HOLO","RTSP","RTSPstatic","RTSP_DEV","RTSP_DEVstatic")
 Entry_de.grid(row=15, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
 Entry_de.current("1")
 de = tk.Label(frameCloud, text='protocol:',height=1,width=18,anchor='ne')
@@ -400,19 +400,18 @@ def GetPlayBackHLS():
     playback_protocol=Entry_de.get()
     start_time=Entry_dh.get()
     end_time=Entry_di.get()
-    live_protocol = Entry_de.get()
+    infos = vardk.get()
     channels=[
         {
             "device_id": device_id,
             "channel_id": channel_id,
             "playback_protocol": playback_protocol,
-            "live_protocol":live_protocol,
             "start_time":urllib.parse.quote(start_time),
             "end_time":urllib.parse.quote(end_time)
         }
     ]
-    res = cloud.CLOUD().GetPlayBackHLSURL(Entry_dc.get(),channels)
-    cloud.CLOUD().GetPlayBackHLSHTML(Entry_dc.get(),channels)
+    res = cloud.CLOUD().GetPlayBackHLSURL(Entry_dc.get(),channels,infos)
+    cloud.CLOUD().GetPlayBackHLSHTML(Entry_dc.get(),channels,infos)
     varca.set(res)
 ce = ttk.Button(frameCloud, text="获取录像URL", command=GetPlayBackHLS)
 ce.grid(row=21, column=1,sticky=tk.E + tk.W, padx=3, pady=3)
@@ -445,8 +444,8 @@ cf = ttk.Button(frameCloud, text="获取录像列表", command=GetCloudReList)
 cf.grid(row=23, columnspan=4,sticky=tk.E + tk.W, padx=3, pady=3)
 
 def setrtspinfo():
-    info = vardk.get()
-    res = cloud.CLOUD().rtspinfo(Entry_dc.get(), info)
+    infos = vardk.get()
+    res = cloud.CLOUD().rtspinfo(Entry_dc.get(), infos)
     varca.set(res)
 cg = ttk.Button(frameCloud, text="设置rtsp鉴权信息", command=setrtspinfo)
 cg.grid(row=24, column=0,sticky=tk.E + tk.W, padx=3, pady=3)

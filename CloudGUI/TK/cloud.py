@@ -107,30 +107,36 @@ class CLOUD():
         HLSHTMLfile.write(HLSHTML)
         HLSHTMLfile.close()
 
-    def GetPlayBackHLSURL(self,envType,channels):
+    def GetPlayBackHLSURL(self,envType,channels,infos):
         access_token=CLOUD().GetToken(envType)
         device_id=channels[0]["device_id"]
         channel_id = channels[0]["channel_id"]
         playback_protocol = channels[0]["playback_protocol"]
         start_time = channels[0]["start_time"]
         end_time = channels[0]["end_time"]
-
-        url = env[envType]["eudms"]+"/v1/"+env[envType]["userid"]+"/devices/"+device_id+"/channels/"+channel_id+"/cloud-records/playback-url?"+"start_time="+start_time+"&end_time="+end_time+"&playback_protocol="+playback_protocol
+        print("GetPlayBackHLSURL,channels",channels)
+        if "DEV" in playback_protocol:
+            url = env[envType]["eudms"] + "/v1/" + env[envType][
+                "userid"] + "/devices/" + device_id + "/channels/" + channel_id + "/device-records/web-playback-url?" + "start_time=" + start_time + "&end_time=" + end_time+"&protocol="+playback_protocol.split("_")[0]
+        else:
+            url = env[envType]["eudms"]+"/v1/"+env[envType]["userid"]+"/devices/"+device_id+"/channels/"+channel_id+"/cloud-records/playback-url?"+"start_time="+start_time+"&end_time="+end_time+"&playback_protocol="+playback_protocol
         headers = {
           'Access-Token': access_token,
           'Content-Type': 'application/json'
         }
-        print("url:",url)
+        print("GetPlayBackHLSURL,url:",url)
         response = requests.get(url, headers=headers,verify=False)
         responsetext = json.loads(response.text)
         jr = json.dumps(json.loads(response.text), indent=4, sort_keys=False, ensure_ascii=False)
         print('************json.dumps.response.text:', jr, type(jr), type(responsetext))
         PlayBackHLSURL = responsetext["playback_url"]
+        if "static" in playback_protocol:
+            PlayBackHLSURL = "rtsp://%s:%s@"%(infos.split(",")[0],infos.split(",")[1]) + PlayBackHLSURL[7:]
         print(PlayBackHLSURL)
         return PlayBackHLSURL
 
-    def GetPlayBackHLSHTML(self,envType,channels):
-        PlayBackHLSURL = CLOUD().GetPlayBackHLSURL(envType,channels)
+    def GetPlayBackHLSHTML(self,envType,channels,infos):
+        PlayBackHLSURL = CLOUD().GetPlayBackHLSURL(envType,channels,infos)
         BackHLSHTML='''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
