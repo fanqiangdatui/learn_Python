@@ -171,11 +171,17 @@ class CLOUD():
         device_id = channels[0]["device_id"]
         channel_id = channels[0]["channel_id"]
         record_type = channels[0]["record_type"]
+        live_protocol=channels[0]["live_protocol"]
         start_time = channels[0]["start_time"]
         end_time = channels[0]["end_time"]
-
-        url = env[envType]["eudms"] + "/v1/" + env[envType][
+        print("GetCloudReList,channels",channels)
+        if "DEV" in live_protocol:
+            url = env[envType]["eudms"] + "/v1/" + env[envType][
+            "userid"] + "/devices/" + device_id + "/channels/" + channel_id + "/device-records?" + "start_time=" + start_time + "&end_time=" + end_time +"&limit=" + "1000"
+        else:
+            url = env[envType]["eudms"] + "/v1/" + env[envType][
             "userid"] + "/devices/" + device_id + "/channels/" + channel_id + "/cloud-records?" + "start_time=" + start_time + "&end_time=" + end_time + "&record_type=" + record_type
+
         headers = {
             'Access-Token': access_token,
             'Content-Type': 'application/json'
@@ -188,3 +194,25 @@ class CLOUD():
         GetCloudReList = jr
         print(GetCloudReList)
         return GetCloudReList
+
+    def rtspinfo(self,envType,infos):
+        access_token=CLOUD().GetToken(envType)
+        url = env[envType]["apig"]+"/v1/"+env[envType]["userid"]+"/media/connection-info"
+
+        payload = json.dumps({
+            "media_name": infos.split(",")[0],
+            "media_password": infos.split(",")[1],
+            "auth_type": infos.split(",")[2]
+        })
+        headers = {
+          'Access-Token': access_token,
+          'Content-Type': 'application/json'
+        }
+        print("payload",payload,type(payload))
+        respon = requests.post(url, headers=headers, data=payload,verify=False)
+        response = requests.get(url, headers=headers, data=payload, verify=False)
+        responsetext = json.loads(response.text)
+        jr = json.dumps(json.loads(response.text), indent=4, sort_keys=False, ensure_ascii=False)
+        print('************json.dumps.response.text:', jr, type(jr), type(responsetext))
+        return responsetext
+

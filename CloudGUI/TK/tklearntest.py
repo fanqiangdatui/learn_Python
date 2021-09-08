@@ -12,7 +12,7 @@ from sdc import SDC
 w = tk.Tk()  # 实例化object，建立窗口w
 w.wm_attributes('-topmost',1)
 w.title('wx696291')  # 给窗口起名字
-wh="310x470"
+wh="320x470"
 w.geometry(wh+'+0+500')  # 设定窗口大小
 note = ttk.Notebook()
 note.place(relx=0,rely=0)
@@ -278,7 +278,7 @@ sd.grid(row=4, columnspan=4,sticky=tk.E + tk.W, padx=3, pady=3)
 
 
 varca = tk.StringVar()
-Entry_ca = tk.Entry(frameCloud, textvariable=varca, show=None, font=('微软雅黑', 8))
+Entry_ca = tk.Entry(frameCloud, textvariable=varca)
 Entry_ca.grid(row=11, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
 varca.set("message")
 ca = tk.Label(frameCloud, text='执行结果:',height=1,width=18,anchor='ne')
@@ -303,9 +303,9 @@ dc.grid(row=16, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
 varde = tk.StringVar()
 Entry_de = ttk.Combobox(frameCloud, width=12,textvariable=varde)
-Entry_de['values']=("HLS","HOLO","RTSP","RTSPstatic")
+Entry_de['values']=("HLS","HLS_DEV","HOLO","RTSP","RTSPstatic","RTSP_DEV")
 Entry_de.grid(row=15, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
-Entry_de.current("2")
+Entry_de.current("1")
 de = tk.Label(frameCloud, text='protocol:',height=1,width=18,anchor='ne')
 de.grid(row=15, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
@@ -331,23 +331,24 @@ Entry_dg['values']=("211好望华为SDC动检SD,21024125399SM6003512",
                     "215国标海康NVR2T,21512345671181234567",
                     "216国标大华NVR8T,21612345671181234567",
                     "217好望华为NVR3T,2198061243WLL3000239",
+                    "218华为1800,2198061240BBL9000019"
                     )
 Entry_dg.grid(row=13, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
-Entry_dg.current("0")
+Entry_dg.current("1")
 dg = tk.Label(frameCloud, text='device_id:',height=1,width=18,anchor='ne')
 dg.grid(row=13, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
 vardh = tk.StringVar()
 Entry_dh = tk.Entry(frameCloud, textvariable=vardh, show=None, font=('微软雅黑', 8))
 Entry_dh.grid(row=18, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
-vardh.set(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(int(time.time()-7200))))
+vardh.set(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(int(time.time()-5*86400))))
 dh = tk.Label(frameCloud, text='start_time:',height=1,width=18,anchor='ne')
 dh.grid(row=18, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
 vardi = tk.StringVar()
 Entry_di = tk.Entry(frameCloud, textvariable=vardi, show=None, font=('微软雅黑', 8))
 Entry_di.grid(row=19, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
-vardi.set(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(int(time.time()))))
+vardi.set(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(int(time.time()+5*86400))))
 di = tk.Label(frameCloud, text='end_time:',height=1,width=18,anchor='ne')
 di.grid(row=19, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
@@ -358,6 +359,13 @@ Entry_dj.grid(row=22, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
 Entry_dj.current("0")
 dj = tk.Label(frameCloud, text='record_type:',height=1,width=18,anchor='ne')
 dj.grid(row=22, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
+
+vardk = tk.StringVar()
+Entry_dk = ttk.Combobox(frameCloud, width=12,textvariable=vardk,font=('微软雅黑', 8))
+Entry_dk['values']=("13709641419,Qaz12580,MD5","13709641419,Qaz12580,SHA256")
+Entry_dk.grid(row=24, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
+Entry_dk.current("0")
+
 
 def getdevice_id():
     device_id = Entry_dg.get()
@@ -392,11 +400,13 @@ def GetPlayBackHLS():
     playback_protocol=Entry_de.get()
     start_time=Entry_dh.get()
     end_time=Entry_di.get()
+    live_protocol = Entry_de.get()
     channels=[
         {
             "device_id": device_id,
             "channel_id": channel_id,
             "playback_protocol": playback_protocol,
+            "live_protocol":live_protocol,
             "start_time":urllib.parse.quote(start_time),
             "end_time":urllib.parse.quote(end_time)
         }
@@ -408,13 +418,14 @@ ce = ttk.Button(frameCloud, text="获取录像URL", command=GetPlayBackHLS)
 ce.grid(row=21, column=1,sticky=tk.E + tk.W, padx=3, pady=3)
 
 
-Textea = tk.Text(frameCloud2,width=50,height=28,font=('微软雅黑', 8))
+Textea = tk.Text(frameCloud2,width=51,height=28,font=('微软雅黑', 8))
 Textea.pack()
 def GetCloudReList():
     Textea.delete("1.0",tk.END)
     device_id = getdevice_id()
     channel_id = Entry_df.get()
     record_type = Entry_dj.get()
+    live_protocol = Entry_de.get()
     start_time = Entry_dh.get()
     end_time = Entry_di.get()
     channels = [
@@ -422,6 +433,7 @@ def GetCloudReList():
             "device_id": device_id,
             "channel_id": channel_id,
             "record_type": record_type,
+            "live_protocol": live_protocol,
             "start_time": urllib.parse.quote(start_time),
             "end_time": urllib.parse.quote(end_time)
         }
@@ -432,4 +444,10 @@ def GetCloudReList():
 cf = ttk.Button(frameCloud, text="获取录像列表", command=GetCloudReList)
 cf.grid(row=23, columnspan=4,sticky=tk.E + tk.W, padx=3, pady=3)
 
+def setrtspinfo():
+    info = vardk.get()
+    res = cloud.CLOUD().rtspinfo(Entry_dc.get(), info)
+    varca.set(res)
+cg = ttk.Button(frameCloud, text="设置rtsp鉴权信息", command=setrtspinfo)
+cg.grid(row=24, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 w.mainloop()
