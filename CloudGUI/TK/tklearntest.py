@@ -401,13 +401,15 @@ def GetPlayBackHLS():
     start_time=Entry_dh.get()
     end_time=Entry_di.get()
     infos = vardk.get()
+    record_type = vardj.get()
     channels=[
         {
             "device_id": device_id,
             "channel_id": channel_id,
             "playback_protocol": playback_protocol,
             "start_time":urllib.parse.quote(start_time),
-            "end_time":urllib.parse.quote(end_time)
+            "end_time":urllib.parse.quote(end_time),
+            "record_type":record_type
         }
     ]
     res = cloud.CLOUD().GetPlayBackHLSURL(Entry_dc.get(),channels,infos)

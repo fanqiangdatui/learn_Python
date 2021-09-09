@@ -112,14 +112,18 @@ class CLOUD():
         device_id=channels[0]["device_id"]
         channel_id = channels[0]["channel_id"]
         playback_protocol = channels[0]["playback_protocol"]
+        record_type=channels[0]["record_type"]
         start_time = channels[0]["start_time"]
         end_time = channels[0]["end_time"]
         print("GetPlayBackHLSURL,channels",channels)
+        rt="&record_type="+record_type
         if "DEV" in playback_protocol:
+            if record_type=="ALL_RECORD":
+                rt=""
             url = env[envType]["eudms"] + "/v1/" + env[envType][
-                "userid"] + "/devices/" + device_id + "/channels/" + channel_id + "/device-records/web-playback-url?" + "start_time=" + start_time + "&end_time=" + end_time+"&protocol="+playback_protocol.split("_")[0]
+                "userid"] + "/devices/" + device_id + "/channels/" + channel_id + "/device-records/web-playback-url?" + "start_time=" + start_time + "&end_time=" + end_time+"&protocol="+playback_protocol.split("_")[0]+rt
         else:
-            url = env[envType]["eudms"]+"/v1/"+env[envType]["userid"]+"/devices/"+device_id+"/channels/"+channel_id+"/cloud-records/playback-url?"+"start_time="+start_time+"&end_time="+end_time+"&playback_protocol="+playback_protocol
+            url = env[envType]["eudms"]+"/v1/"+env[envType]["userid"]+"/devices/"+device_id+"/channels/"+channel_id+"/cloud-records/playback-url?"+"start_time="+start_time+"&end_time="+end_time+"&playback_protocol="+playback_protocol+rt
         headers = {
           'Access-Token': access_token,
           'Content-Type': 'application/json'
@@ -129,8 +133,8 @@ class CLOUD():
         responsetext = json.loads(response.text)
         jr = json.dumps(json.loads(response.text), indent=4, sort_keys=False, ensure_ascii=False)
         print('************json.dumps.response.text:', jr, type(jr), type(responsetext))
-        PlayBackHLSURL = responsetext["playback_url"]
-        if "static" in playback_protocol:
+        PlayBackHLSURL = responsetext.get("playback_url",responsetext)
+        if "static" in playback_protocol and "playback_url" in responsetext:
             PlayBackHLSURL = "rtsp://%s:%s@"%(infos.split(",")[0],infos.split(",")[1]) + PlayBackHLSURL[7:]
         print(PlayBackHLSURL)
         return PlayBackHLSURL
