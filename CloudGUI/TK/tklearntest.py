@@ -317,22 +317,22 @@ Entry_df['values']=("34020001001310000001",
                     "34020001001310000004",
                     "0","1","2","3",)
 Entry_df.grid(row=14, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
-Entry_df.current("4")
+Entry_df.current("0")
 df = tk.Label(frameCloud, text='channel_id:',height=1,width=18,anchor='ne')
 df.grid(row=14, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
 vardg = tk.StringVar()
 Entry_dg = ttk.Combobox(frameCloud, width=24,textvariable=vardg, show=None, font=('微软雅黑', 8))
-Entry_dg['values']=("家里,21024125019SM6000630",
-                    "211好望华为SDC动检SD,21024125399SM6003512",
-                    "212国标海康SDC球机SD,21212345671321234567",
-                    "213好望华为SDC拾音喇叭SD,2102412969WLL40000012",
+Entry_dg['values']=("200国标大华SDC拾音球机,20012345671321234567",
+                    "202国标海康SDC拾音球机SD,20212345671321234567",
+                    "213好望华为SDC拾音喇叭SD,2102412969WLM8005595",
                     "213国标华为SDC拾音喇叭SD,21312345671321234567",
                     "214国标海康SDC拾音喇叭,21412345671321234567",
                     "215国标海康NVR2T,21512345671181234567",
                     "216国标大华NVR8T,21612345671181234567",
                     "217好望华为NVR3T,2198061243WLL3000239",
-                    "218华为1800,2198061240BBL9000019"
+                    "218好望华为IVS1800_4T,2198061240BBL9000019",
+                    "家里好望华为SDC动检SD,21024125399SM6003512"
                     )
 Entry_dg.grid(row=13, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
 Entry_dg.current("0")
