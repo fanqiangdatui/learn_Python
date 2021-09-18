@@ -305,7 +305,7 @@ varde = tk.StringVar()
 Entry_de = ttk.Combobox(frameCloud, width=12,textvariable=varde)
 Entry_de['values']=("HLS","HLS_DEV","HOLO","RTSP","RTSPstatic","RTSP_DEV","RTSP_DEVstatic")
 Entry_de.grid(row=15, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
-Entry_de.current("3")
+Entry_de.current("1")
 de = tk.Label(frameCloud, text='protocol:',height=1,width=18,anchor='ne')
 de.grid(row=15, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
@@ -317,7 +317,7 @@ Entry_df['values']=("34020001001310000001",
                     "34020001001310000004",
                     "0","1","2","3",)
 Entry_df.grid(row=14, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
-Entry_df.current("0")
+Entry_df.current("4")
 df = tk.Label(frameCloud, text='channel_id:',height=1,width=18,anchor='ne')
 df.grid(row=14, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
@@ -335,7 +335,7 @@ Entry_dg['values']=("200国标大华SDC拾音球机,20012345671321234567",
                     "家里好望华为SDC动检SD,21024125399SM6003512"
                     )
 Entry_dg.grid(row=13, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
-Entry_dg.current("0")
+Entry_dg.current("3")
 dg = tk.Label(frameCloud, text='device_id:',height=1,width=18,anchor='ne')
 dg.grid(row=13, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
