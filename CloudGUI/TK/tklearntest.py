@@ -323,7 +323,7 @@ df.grid(row=14, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
 vardg = tk.StringVar()
 Entry_dg = ttk.Combobox(frameCloud, width=24,textvariable=vardg, show=None, font=('微软雅黑', 8))
-Entry_dg['values']=("200国标大华SDC拾音球机,20012345671321234567",
+Entry_dg['values']=("200国标大华SDC拾音球机SD,20012345671321234567",
                     "202国标海康SDC拾音球机SD,20212345671321234567",
                     "213好望华为SDC拾音喇叭SD,2102412969WLM8005595",
                     "213国标华为SDC拾音喇叭SD,21312345671321234567",
@@ -332,10 +332,12 @@ Entry_dg['values']=("200国标大华SDC拾音球机,20012345671321234567",
                     "216国标大华NVR8T,21612345671181234567",
                     "217好望华为NVR3T,2198061243WLL3000239",
                     "218好望华为IVS1800_4T,2198061240BBL9000019",
-                    "家里好望华为SDC动检SD,21024125399SM6003512"
+                    "221家里好望华为SDC真实SD,21024125399SM6002957",
+                    "221家里国标华为SDC真实SD,22112345671321234567",
+                    "222家里好望华为SDC灌SD,21024125399SM6003512",
                     )
 Entry_dg.grid(row=13, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
-Entry_dg.current("3")
+Entry_dg.current("9")
 dg = tk.Label(frameCloud, text='device_id:',height=1,width=18,anchor='ne')
 dg.grid(row=13, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 

@@ -49,6 +49,10 @@ class CLOUD():
         if channels[0]['live_protocol']=="RTSPstatic":
             isstatic=1
             channels[0]['live_protocol'] = "RTSP"
+        elif "HLS" in channels[0]['live_protocol']:
+            channels[0]['live_protocol'] = "HLS"
+        elif "RTSP" in channels[0]['live_protocol']:
+            channels[0]['live_protocol'] = "RTSP"
         payload = json.dumps({
           "channels": channels
         })

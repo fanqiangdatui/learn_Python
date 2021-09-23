@@ -42,7 +42,7 @@ CIRCLE_SEND=1,  //1代表循环灌流，0为不循环
 900版本可以不重启，在/usr/app/bin目录下修改mount.sh权限，执行脚本，然后重新拉流即可播放视频，指令如下：
 umount -l /nfsroot      // 取消挂载
 cd /usr/app/bin
-chmod 777 mount.sh
+chmod 777 /usr/app/bin/mount.sh
 ./mount.sh
 touch /tmp/AutoRestart  // 重新拉流
 cat /proc/umap/venc |grep -C 4 'VENC STREAM STATE' // 查看帧率
