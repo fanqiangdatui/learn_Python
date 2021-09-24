@@ -46,13 +46,11 @@ class CLOUD():
 
         url = env[envType]["eudms"]+"/v1/"+env[envType]["userid"]+"/devices/channels/cloud-live/url"
         isstatic=0
-        if channels[0]['live_protocol']=="RTSPstatic":
+        if "static" in channels[0]['live_protocol']:
             isstatic=1
-            channels[0]['live_protocol'] = "RTSP"
-        elif "HLS" in channels[0]['live_protocol']:
-            channels[0]['live_protocol'] = "HLS"
-        elif "RTSP" in channels[0]['live_protocol']:
-            channels[0]['live_protocol'] = "RTSP"
+            channels[0]['live_protocol'] = channels[0]['live_protocol'].split(",")[0]
+        if "DEV" in channels[0]['live_protocol']:
+            channels[0]['live_protocol'] = channels[0]['live_protocol'].split("_")[0]
         payload = json.dumps({
           "channels": channels
         })
