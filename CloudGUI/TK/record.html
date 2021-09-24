@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>m3u8实况</title>
+    <link href="https://cdn.bootcss.com/video.js/7.6.5/alt/video-js-cdn.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/video.js/6.6.2/video.js"></script>
+    <script src="https://cdn.bootcss.com/videojs-contrib-hls/5.15.0/videojs-contrib-hls.min.js"></script>
+</head>
+<body>
+    <video id="myVideo" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" width="1080" height="708" data-setup='{}'>  
+        <!-- <source id="source" src="http://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8"  type="application/x-mpegURL">   -->
+        <source id="source" src="rtsp://13709641419:Qaz12580@124.70.158.153:7201/dev_vod?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfbW9kZSI6IkdCMjgxODEiLCJjaGFubmVsX2lkIjoiMzQwMjAwMDEwMDEzMTAwMDAwMDEiLCJkZXZpY2VfaWQiOiIyMTMxMjM0NTY3MTMyMTIzNDU2NyIsImVuZF90aW1lIjoiMjAyMTA5MjgxODI5MjciLCJlbnRlcnByaXNlX2lkIjoiMTE2NjM2Njg4OTIwMjAwOTAyMTQyNDUyIiwiZXhwaXJlX3RpbWUiOjE2MzI0MTgyNDIsImxpbmtfa2V5IjoiMTYzMjQ0NzAxMjEyMzEyMTI3NHpJa2xUaGRSIiwicmVjb3JkX3R5cGUiOiJhbGwiLCJyZXF1ZXN0X2lkIjoiZjEzOTQwMDQtMWNkNi00MzY0LTlmMjgtNzIwY2RjMGRiYTI2Iiwic3RhcnRfdGltZSI6IjIwMjEwOTE4MTgyOTI3IiwidXNlcl9pZCI6IjMxMDkyODUzMjIwMjEwNjA5MTUyMjUwIiwidXVpZCI6ImY2M2EzMzc3LTFjZDYtMTFlYy04MTc1LWZhMTYzZTA1NWQxZCJ9.8HXlanwU36dMZYd5a7KHSlf7Bu015FU9ValzGGIIlO4&device_id=21312345671321234567&channel_id=34020001001310000001&stream_type=0"  type="application/x-mpegURL">
+    </video>
+</body>
+<script>    
+    // videojs 简单使用  
+    var myVideo = videojs('myVideo',{
+        bigPlayButton : true, 
+        textTrackDisplay : false, 
+        posterImage: false,
+        errorDisplay : false,
+    })
+</script>
+</html>
