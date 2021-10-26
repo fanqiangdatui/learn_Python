@@ -454,4 +454,19 @@ def setrtspinfo():
     varca.set(res)
 cg = ttk.Button(frameCloud, text="设置rtsp鉴权信息", command=setrtspinfo)
 cg.grid(row=24, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
+
+def getstream_ability():
+    device_id=getdevice_id()
+    channel_id=Entry_df.get()
+    channels=[
+        {
+            "device_id": device_id,
+            "channel_id": channel_id
+        }
+    ]
+    res = cloud.CLOUD().getstream_ability(Entry_dc.get(),channels)
+    Textea.delete("1.0", tk.END)
+    Textea.insert("1.0", res)
+ch = ttk.Button(frameCloud, text="ability", command=getstream_ability)
+ch.grid(row=25, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 w.mainloop()

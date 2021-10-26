@@ -14,18 +14,30 @@ env={"北京四":{"ak": "102559065820210301100052",
             "sk": "1025590658202103011000526d4ae1087cf14e008fbed45818411c87",
             "eudms":"https://api-ivm.myhuaweicloud.com",
             "userid":"85826388920210609172648",
-            "apig": "https://api-ivm.myhuaweicloud.com"},
+            "apig": "https://api-ivm.myhuaweicloud.com",
+            "dmajavaip":"https://api-ivm.myhuaweicloud.com",
+            "enterprise_id": "5669365720200916104630",
+            "umsip":"https://application.holisens.huawei.com"
+            },
      "上海一":{"ak": "df53000fc713409545fe00c2fcff4b2d",
             "sk": "61ba0eb195d06579e3978b60cce1414d2929615845a4c422128288c3ab5036dc",
             "eudms":"https://121.36.193.23:443",
             "userid":"31092853220210609152250",
             # "apig": "https://api-ivm.myhuaweicloud.com"},
-            "apig": "https://124.70.158.153:7200"},
+            "apig": "https://124.70.158.153:7200",
+            "dmajavaip":"https://api-ivm-sh.myhuaweicloud.com",
+            "enterprise_id": "116636688920200902142452",
+            "umsip":"https://124.70.158.153:443"
+            },
      "乌兰":{"ak": "bc72cb4391957521bc9b05252ef6ed0b",
             "sk": "58836ff3a264b5470bf0c1643b71a3d1c9b4319ae3033c72b12aa0fe80c6363a",
             "eudms":"http://100.94.174.66:18090",
             "userid":"64797698520210602101823",
-            "apig": ""}
+            "apig": "",
+            "dmajavaip":"",
+           "enterprise_id": "125865530520210114171228",
+           "umsip":"https://100.93.28.26:8081"
+           }
      }
 class CLOUD():
 
@@ -39,6 +51,22 @@ class CLOUD():
         jr = json.dumps(json.loads(response.text), indent=4, sort_keys=False, ensure_ascii=False)
         print('************json.dumps.response.text:', jr, type(jr), type(responsetext))
         access_token = responsetext['access_token']
+        print(access_token)
+        return access_token
+    def GetAppToken(self,envType):
+        data={
+	"account":"13709641419",
+	"password":"Qaz12580",
+	"app_lan":"zh-CN",
+	"app_version":"1.0.0.1.20190101",
+	"app_type":0
+}
+        url=env[envType]["umsip"]+"/v1/ums/login"
+        response=requests.post(url,json=data,verify=False)
+        responsetext = json.loads(response.text)
+        jr = json.dumps(json.loads(response.text), indent=4, sort_keys=False, ensure_ascii=False)
+        print('************GetAppToken-json.dumps.response.text:', jr, type(jr), type(responsetext))
+        access_token = responsetext['data']["token"]
         print(access_token)
         return access_token
     def GetHLSURL(self,envType,channels):
@@ -228,4 +256,24 @@ class CLOUD():
         jr = json.dumps(json.loads(response.text), indent=4, sort_keys=False, ensure_ascii=False)
         print('************json.dumps.response.text:', jr, type(jr), type(responsetext))
         return responsetext
+
+    def getstream_ability(self,envType,channels):
+        access_token=CLOUD().GetToken(envType)
+        device_id=channels[0]["device_id"]
+        channel_id = channels[0]["channel_id"]
+        url = env[envType]["dmajavaip"] + "/v1/" + env[envType][
+            "userid"] + "/devices/" + device_id + "/channels/" + channel_id + "/stream-ability"
+
+        headers = {
+          'Content-Type': 'application/json',
+            'client-type':'ISV',
+            'Authorization': 'Bearer ' + access_token
+        }
+        print("getstream_ability-headers:",headers)
+        print("getstream_ability-uri:", url)
+        response = requests.get(url, headers=headers, verify=False)
+        responsetext = json.loads(response.text)
+        jr = json.dumps(json.loads(response.text), indent=4, sort_keys=False, ensure_ascii=False)
+        print('************stream_ability-json.dumps.response.text:', jr, type(jr), type(responsetext))
+        return jr
 
