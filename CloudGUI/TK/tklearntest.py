@@ -303,9 +303,9 @@ dc.grid(row=16, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
 varde = tk.StringVar()
 Entry_de = ttk.Combobox(frameCloud, width=12,textvariable=varde)
-Entry_de['values']=("HLS","HLS_DEV","HOLO","RTSP","RTSP,static","RTSP_DEV","RTSP_DEV,static")
+Entry_de['values']=("HLS","HLS_HTTP","HLS_DEV","HLS_DEV_HTTP","HOLO","RTSP","RTSP,static","RTSP_DEV","RTSP_DEV,static")
 Entry_de.grid(row=15, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
-Entry_de.current("1")
+Entry_de.current("0")
 de = tk.Label(frameCloud, text='protocol:',height=1,width=18,anchor='ne')
 de.grid(row=15, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
@@ -325,6 +325,7 @@ vardg = tk.StringVar()
 Entry_dg = ttk.Combobox(frameCloud, width=24,textvariable=vardg, show=None, font=('微软雅黑', 8))
 Entry_dg['values']=("200国标大华SDC拾音球机SD,20012345671321234567",
                     "202国标海康SDC拾音球机SD,20212345671321234567",
+                    "205好望华为SDC动检,21024125409SM3000825",
                     "213好望华为SDC拾音喇叭SD,2102412969WLM8005595",
                     "213国标华为SDC拾音喇叭SD,21312345671321234567",
                     "214国标海康SDC拾音喇叭,21412345671321234567",
@@ -337,7 +338,7 @@ Entry_dg['values']=("200国标大华SDC拾音球机SD,20012345671321234567",
                     "222家里好望华为SDC灌SD,21024125399SM6003512",
                     )
 Entry_dg.grid(row=13, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
-Entry_dg.current("9")
+Entry_dg.current("2")
 dg = tk.Label(frameCloud, text='device_id:',height=1,width=18,anchor='ne')
 dg.grid(row=13, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
@@ -467,6 +468,6 @@ def getstream_ability():
     res = cloud.CLOUD().getstream_ability(Entry_dc.get(),channels)
     Textea.delete("1.0", tk.END)
     Textea.insert("1.0", res)
-ch = ttk.Button(frameCloud, text="ability", command=getstream_ability)
+ch = ttk.Button(frameCloud, text="码流能力集", command=getstream_ability)
 ch.grid(row=25, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 w.mainloop()
