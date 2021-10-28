@@ -107,7 +107,7 @@ class CLOUD():
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>m3u8实况</title>
+    <title>live</title>
     <link href="https://cdn.bootcss.com/video.js/7.6.5/alt/video-js-cdn.min.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/video.js/6.6.2/video.js"></script>
     <script src="https://cdn.bootcss.com/videojs-contrib-hls/5.15.0/videojs-contrib-hls.min.js"></script>
@@ -176,7 +176,7 @@ class CLOUD():
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>m3u8实况</title>
+    <title>record</title>
     <link href="https://cdn.bootcss.com/video.js/7.6.5/alt/video-js-cdn.min.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/video.js/6.6.2/video.js"></script>
     <script src="https://cdn.bootcss.com/videojs-contrib-hls/5.15.0/videojs-contrib-hls.min.js"></script>

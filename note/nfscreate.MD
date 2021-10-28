@@ -25,9 +25,11 @@ cp /nfsroot/VideoTestCfg /usr/setting/VideoTestCfg
 touch /tmp/AnalyseVideoControlCfg
 其中ipadress为你的本地ip地址，后面跟着本地nfsroot路径。(上面安装nfs工具后设置的路径）
 
+vi /usr/app/bin/mount.sh
 mount -t nfs -o nolock 192.168.5.171:/home/nfsroot /nfsroot
 cp /nfsroot/VideoTestCfg /usr/setting/VideoTestCfg
 touch /tmp/AnalyseVideoControlCfg
+
 
 
 FILE_PATH=/nfsroot/stream_files, //灌流文件所在目录
@@ -46,3 +48,5 @@ chmod 777 /usr/app/bin/mount.sh
 ./mount.sh
 touch /tmp/AutoRestart  // 重新拉流
 cat /proc/umap/venc |grep -C 4 'VENC STREAM STATE' // 查看帧率
+
+chmod 777 /usr/app/bin/mount.sh && /usr/app/bin/mount.sh && touch /tmp/AutoRestart
