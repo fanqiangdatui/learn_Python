@@ -303,7 +303,7 @@ dc.grid(row=16, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
 varde = tk.StringVar()
 Entry_de = ttk.Combobox(frameCloud, width=12,textvariable=varde)
-Entry_de['values']=("HLS","HLS_HTTP","HLS_DEV","HLS_DEV_HTTP","HOLO","RTSP","RTSP,static","RTSP_DEV","RTSP_DEV,static")
+Entry_de['values']=("HLS","HLS_HTTPS","HLS_DEV","HLS_DEV_HTTPS","HOLO","RTSP","RTSP,static","RTSP_DEV","RTSP_DEV,static")
 Entry_de.grid(row=15, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
 Entry_de.current("0")
 de = tk.Label(frameCloud, text='protocol:',height=1,width=18,anchor='ne')
