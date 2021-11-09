@@ -10,8 +10,8 @@ import os
 import urllib
 ssl._create_default_https_context = ssl._create_unverified_context
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-env={"北京四":{"ak": "102559065820210301100052",
-            "sk": "1025590658202103011000526d4ae1087cf14e008fbed45818411c87",
+env={"北京四":{"ak": "fe46ddffe424132f5e35bd46d8080538",
+            "sk": "51316904693aaf653908e5fe09e04e012ebeccc61e423793cc20006558892b94",
             "eudms":"https://api-ivm.myhuaweicloud.com",
             "userid":"85826388920210609172648",
             "apig": "https://api-ivm.myhuaweicloud.com",
