@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 import time
-
 from requests.auth import HTTPDigestAuth
 import ssl
 import urllib3
 import requests
 import json
 import os
+import openpyxl
 import urllib
 ssl._create_default_https_context = ssl._create_unverified_context
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -37,7 +37,16 @@ env={"北京四":{"ak": "fe46ddffe424132f5e35bd46d8080538",
             "dmajavaip":"",
            "enterprise_id": "125865530520210114171228",
            "umsip":"https://100.93.28.26:8081"
-           }
+           },
+     "性能": {"ak": "8e6421bdd50ebc5b71a2fa7836c0f8f6",
+            "sk": "5506c15ed8aec38926c912ffb5884c0f59ff3a96ca877f21cf792b47ec059c49",
+            "eudms": "http://100.85.254.13:18090",
+            "userid": "142806919520211102153255",
+            "apig": "",
+            "dmajavaip": "",
+            "enterprise_id": "5669365720200916104630",
+            "umsip": ""
+            }
      }
 class CLOUD():
 
@@ -276,4 +285,46 @@ class CLOUD():
         jr = json.dumps(json.loads(response.text), indent=4, sort_keys=False, ensure_ascii=False)
         print('************stream_ability-json.dumps.response.text:', jr, type(jr), type(responsetext))
         return jr
+
+    def getCloudlistlist(self):
+        '''
+        从xlsx生成
+        :return:
+        '''
+        wb = openpyxl.load_workbook('.\\cloud.xlsx')
+        Cloudlistlist = []
+        ipc6code = '0000'
+        portDict={'HWSDK':6060,'onvif':80,'DHSDK':37777,'HIKSDK':8000}
+        for sdk in wb.sheetnames:
+            sheet = wb[sdk]
+            rlistlist = []
+            for row in sheet.rows:
+                rlist = []
+                for r in row:
+                    print(r.value)
+                    rlist = rlist + [r.value]
+                print(rlist)
+                rlistlist = rlistlist + [rlist]
+            rlistlist[0]
+            MPURi = rlistlist[0].index('*集群或NVR编码')
+            if '*IP' in rlistlist[0]:
+                ipi = rlistlist[0].index('*IP')
+            else:
+                ipi = ''
+            if '*端口' in rlistlist[0]:
+                porti = rlistlist[0].index('*端口')
+            else:
+                porti = ''
+            if '*用户名' in rlistlist[0]:
+                deviceUseri = rlistlist[0].index('*用户名')
+            else:
+                deviceUseri = ''
+            if '*密码' in rlistlist[0]:
+                devicePasswordi = rlistlist[0].index('*密码')
+            else:
+                devicePasswordi = ''
+
+            rlistlist = rlistlist[1:]
+
+            print('-----------rlistlist', rlistlist)
 
