@@ -470,4 +470,11 @@ def getstream_ability():
     Textea.insert("1.0", res)
 ch = ttk.Button(frameCloud, text="码流能力集", command=getstream_ability)
 ch.grid(row=25, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
+
+def setRecordPlan():
+    res = cloud.CLOUD().setRecordPlan(Entry_dc.get())
+    Textea.delete("1.0", tk.END)
+    Textea.insert("1.0", res)
+cg = ttk.Button(frameCloud, text="设置计划", command=setRecordPlan)
+cg.grid(row=26, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 w.mainloop()

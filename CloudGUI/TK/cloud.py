@@ -286,45 +286,48 @@ class CLOUD():
         print('************stream_ability-json.dumps.response.text:', jr, type(jr), type(responsetext))
         return jr
 
-    def getCloudlistlist(self):
+    def getCloudDevlist(self):
         '''
         从xlsx生成
         :return:
         '''
         wb = openpyxl.load_workbook('.\\cloud.xlsx')
-        Cloudlistlist = []
-        ipc6code = '0000'
-        portDict={'HWSDK':6060,'onvif':80,'DHSDK':37777,'HIKSDK':8000}
         for sdk in wb.sheetnames:
             sheet = wb[sdk]
-            rlistlist = []
+            devlist = []
             for row in sheet.rows:
                 rlist = []
                 for r in row:
                     print(r.value)
                     rlist = rlist + [r.value]
-                print(rlist)
-                rlistlist = rlistlist + [rlist]
-            rlistlist[0]
-            MPURi = rlistlist[0].index('*集群或NVR编码')
-            if '*IP' in rlistlist[0]:
-                ipi = rlistlist[0].index('*IP')
-            else:
-                ipi = ''
-            if '*端口' in rlistlist[0]:
-                porti = rlistlist[0].index('*端口')
-            else:
-                porti = ''
-            if '*用户名' in rlistlist[0]:
-                deviceUseri = rlistlist[0].index('*用户名')
-            else:
-                deviceUseri = ''
-            if '*密码' in rlistlist[0]:
-                devicePasswordi = rlistlist[0].index('*密码')
-            else:
-                devicePasswordi = ''
+                print(rlist,'------')
+                devlist.append({
+    "device_id" : rlist[0],
+    "channel_id" : rlist[1],
+    "all_day" : "true"})
+            devlist=devlist[1:]
+            devlist = {
+  "plans" : devlist
+}
+            print(devlist)
+            return devlist
 
-            rlistlist = rlistlist[1:]
+    def setRecordPlan(self,envType):
+        access_token=CLOUD().GetToken(envType)
+        url = env[envType]["eudms"]+"/v1/"+env[envType]["userid"]+"/devices/channels/record-plan"
+        payload = json.dumps(CLOUD().getCloudDevlist())
+        headers = {
+          'Access-Token': access_token,
+          'Content-Type': 'application/json'
+        }
+        print("payload",payload,type(payload))
+        print("url",url)
+        response = requests.put(url, headers=headers, data=payload,verify=False)
+        responsetext = json.loads(response.text)
+        jr = json.dumps(json.loads(response.text), indent=4, sort_keys=False, ensure_ascii=False)
+        print('************json.dumps.response.text:', jr, type(jr), type(responsetext))
+        return jr
 
-            print('-----------rlistlist', rlistlist)
 
+if __name__=='__main__':
+    CLOUD().getCloudlistlist()
