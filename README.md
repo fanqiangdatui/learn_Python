@@ -10,3 +10,4 @@ C:\ProgramData\Anaconda3\envs\learn_Python\python.exe
 -m PyQt5.uic.pyuic $FileName$ -o $FileNameWithoutExtension$.py
 $FileDir$
 
+git reset --hard origin/master
