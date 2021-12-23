@@ -295,7 +295,7 @@ cd.grid(row=9, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
 vardc = tk.StringVar()
 Entry_dc = ttk.Combobox(frameCloud, width=12,textvariable=vardc)
-Entry_dc['values']=("北京四","上海一","乌兰","性能")
+Entry_dc['values']=("北京四","上海一","乌兰","性能","G42")
 Entry_dc.grid(row=16, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
 Entry_dc.current("1")
 dc = tk.Label(frameCloud, text='环境选择:',height=1,width=18,anchor='ne')

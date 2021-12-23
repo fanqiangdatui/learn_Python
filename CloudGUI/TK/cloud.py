@@ -46,6 +46,15 @@ env={"北京四":{"ak": "fe46ddffe424132f5e35bd46d8080538",
             "dmajavaip": "",
             "enterprise_id": "5669365720200916104630",
             "umsip": ""
+            },
+     "G42": {"ak": "7447f18719d0ae7087d927d7366c6b2a",
+            "sk": "8126a9f130727e76a9cea1f605fd43e9c88d4dcb9ccfb7046be0f4a4cbfbf5c2",
+            "eudms": "https://121.37.196.216:443",
+            "userid": "29778234920211223064904",
+            "apig": "https://api-ivm-gz-g42.myhuaweicloud.com",
+            "dmajavaip": "",
+            "enterprise_id": "5802624820210826173521",
+            "umsip": ""
             }
      }
 class CLOUD():
