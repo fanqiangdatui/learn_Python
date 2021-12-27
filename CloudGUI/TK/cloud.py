@@ -55,7 +55,16 @@ env={"北京四":{"ak": "fe46ddffe424132f5e35bd46d8080538",
             "dmajavaip": "",
             "enterprise_id": "5802624820210826173521",
             "umsip": ""
-            }
+            },
+     "广州特性": {"ak": "420801b0b3fc1a4427181748436296c0",
+             "sk": "207235accdb5ee8e40dc575ea44960a7a2d1ec6a1e8957abfb94cc0a4b97805c",
+             "eudms": "http://124.71.212.163:18090",
+             "userid": "129052444320211025100945",
+             "apig": "https://api-ivm-gz-feature.myhuaweicloud.com",
+             "dmajavaip": "",
+             "enterprise_id": "5802624820210826173521",
+             "umsip": ""
+             }
      }
 class CLOUD():
 
