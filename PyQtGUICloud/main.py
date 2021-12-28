@@ -7,7 +7,7 @@ class MainWindow(QMainWindow, Ui_Form):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
         self.setupUi(self)
-        self.textEdit.setText('fgjhsjsf')
+        self.textEdit.setText('message')
 
 
 
