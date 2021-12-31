@@ -355,11 +355,6 @@
         </item>
         <item>
          <property name="text">
-          <string>新建项目</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
           <string>上海一</string>
          </property>
         </item>

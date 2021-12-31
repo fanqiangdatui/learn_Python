@@ -26,9 +26,9 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQtCloudGUI import Ui_Form
 import cloud
 
-class MyMainForm(QMainWindow, Ui_Form):
+class CloudMainForm(QMainWindow, Ui_Form):
     def __init__(self, parent=None):
-        super(MyMainForm, self).__init__(parent)
+        super(CloudMainForm, self).__init__(parent)
         self.setupUi(self)
         #添加登录按钮信号和槽。注意display函数不加小括号()
         self.pushButton_Live.clicked.connect(self.GetNorthToken)
@@ -36,13 +36,15 @@ class MyMainForm(QMainWindow, Ui_Form):
     def GetNorthToken(self):
         #利用line Edit控件对象text()函数获取界面输入
         self.textEdit.setText(cloud.CLOUD().GetToken(self.comboBox_env.currentText()))
+        print(self.comboBox_env.currentText())
 
 if __name__ == "__main__":
     #固定的，PyQt5程序都需要QApplication对象。sys.argv是命令行参数列表，确保程序可以双击运行
     app = QApplication(sys.argv)
     #初始化
-    myWin = MyMainForm()
+    CloudMainForm = CloudMainForm()
+    CloudMainForm.setWindowTitle("PyQtCloudGUI")
     #将窗口控件显示在屏幕上
-    myWin.show()
+    CloudMainForm.show()
     #程序运行，sys.exit方法确保程序完整退出。
     sys.exit(app.exec_())
