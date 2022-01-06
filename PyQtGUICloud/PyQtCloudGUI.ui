@@ -9,36 +9,27 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>420</width>
-    <height>601</height>
+    <width>452</width>
+    <height>896</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>9</x>
-     <y>9</y>
-     <width>399</width>
-     <height>597</height>
+     <x>10</x>
+     <y>10</y>
+     <width>436</width>
+     <height>881</height>
     </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-     <weight>50</weight>
-     <bold>false</bold>
-     <strikeout>false</strikeout>
-     <kerning>true</kerning>
-    </font>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <layout class="QFormLayout" name="formLayout">
+     <layout class="QGridLayout" name="gridLayout_2">
       <item row="0" column="0">
-       <widget class="QLabel" name="label">
+       <widget class="QLabel" name="label_5">
         <property name="font">
          <font>
           <family>Times New Roman</family>
@@ -56,12 +47,12 @@
          <locale language="Chinese" country="China"/>
         </property>
         <property name="text">
-         <string>stream_type</string>
+         <string>env</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QComboBox" name="comboBox_stream_type">
+       <widget class="QComboBox" name="comboBox_env">
         <property name="font">
          <font>
           <family>Times New Roman</family>
@@ -77,12 +68,32 @@
         </property>
         <item>
          <property name="text">
-          <string>PRIMARY_STREAM</string>
+          <string>上海一</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>SECONDARY_STREAM_1</string>
+          <string>北京四</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>乌兰</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>性能</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>G42</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>广州特性</string>
          </property>
         </item>
        </widget>
@@ -208,26 +219,6 @@
         </property>
         <item>
          <property name="text">
-          <string>34020001001310000001</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>34020001001310000002</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>34020001001310000003</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>34020001001310000004</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
           <string>0</string>
          </property>
         </item>
@@ -244,6 +235,26 @@
         <item>
          <property name="text">
           <string>3</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>34020001001310000001</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>34020001001310000002</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>34020001001310000003</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>34020001001310000004</string>
          </property>
         </item>
        </widget>
@@ -267,12 +278,12 @@
          <locale language="Chinese" country="China"/>
         </property>
         <property name="text">
-         <string>protocol</string>
+         <string>live_protocol</string>
         </property>
        </widget>
       </item>
       <item row="3" column="1">
-       <widget class="QComboBox" name="comboBox_protocol">
+       <widget class="QComboBox" name="comboBox_live_protocol">
         <property name="font">
          <font>
           <family>Times New Roman</family>
@@ -333,8 +344,31 @@
         </item>
        </widget>
       </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_9">
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+          <strikeout>false</strikeout>
+          <kerning>true</kerning>
+         </font>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::RightToLeft</enum>
+        </property>
+        <property name="locale">
+         <locale language="Chinese" country="China"/>
+        </property>
+        <property name="text">
+         <string>playback_protocol </string>
+        </property>
+       </widget>
+      </item>
       <item row="4" column="1">
-       <widget class="QComboBox" name="comboBox_env">
+       <widget class="QComboBox" name="comboBox_playback_protocol">
         <property name="font">
          <font>
           <family>Times New Roman</family>
@@ -350,37 +384,207 @@
         </property>
         <item>
          <property name="text">
-          <string>北京四</string>
+          <string>HLS</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>上海一</string>
+          <string>HLS_HTTPS</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>乌兰</string>
+          <string>HLS_DEV</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>性能</string>
+          <string>HLS_DEV_HTTPS</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>G42</string>
+          <string>HOLO</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>广州特性</string>
+          <string>RTSP</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>RTSP,static</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>RTSP_DEV</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>RTSP_DEV,static</string>
          </property>
         </item>
        </widget>
       </item>
       <item row="5" column="0">
+       <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+          <strikeout>false</strikeout>
+          <kerning>true</kerning>
+         </font>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::RightToLeft</enum>
+        </property>
+        <property name="locale">
+         <locale language="Chinese" country="China"/>
+        </property>
+        <property name="text">
+         <string>stream_type</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QComboBox" name="comboBox_stream_type">
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+          <strikeout>false</strikeout>
+          <kerning>true</kerning>
+         </font>
+        </property>
+        <property name="editable">
+         <bool>true</bool>
+        </property>
+        <item>
+         <property name="text">
+          <string>PRIMARY_STREAM</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>SECONDARY_STREAM_1</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="label_10">
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+          <strikeout>false</strikeout>
+          <kerning>true</kerning>
+         </font>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::RightToLeft</enum>
+        </property>
+        <property name="locale">
+         <locale language="Chinese" country="China"/>
+        </property>
+        <property name="text">
+         <string>record_type</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QComboBox" name="comboBox_record_type">
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+          <strikeout>false</strikeout>
+          <kerning>true</kerning>
+         </font>
+        </property>
+        <property name="editable">
+         <bool>true</bool>
+        </property>
+        <item>
+         <property name="text">
+          <string>NORMAL_RECORD</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>MOTION_RECORD</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="label_11">
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+          <strikeout>false</strikeout>
+          <kerning>true</kerning>
+         </font>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::RightToLeft</enum>
+        </property>
+        <property name="locale">
+         <locale language="Chinese" country="China"/>
+        </property>
+        <property name="text">
+         <string>Client_Type</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QComboBox" name="comboBox_Client_Type">
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+          <strikeout>false</strikeout>
+          <kerning>true</kerning>
+         </font>
+        </property>
+        <property name="editable">
+         <bool>true</bool>
+        </property>
+        <item>
+         <property name="text">
+          <string>ISV</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>APP_ENTERPRISE</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>APP_PERSONAL</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="8" column="0">
        <widget class="QLabel" name="label_6">
         <property name="font">
          <font>
@@ -403,7 +607,7 @@
         </property>
        </widget>
       </item>
-      <item row="5" column="1">
+      <item row="8" column="1">
        <widget class="QDateTimeEdit" name="dateTimeEdit_start_time">
         <property name="font">
          <font>
@@ -416,11 +620,11 @@
          </font>
         </property>
         <property name="displayFormat">
-         <string>yyyy/M/d HH:mm:ss</string>
+         <string>yyyy-MM-dd HH:mm:ss</string>
         </property>
        </widget>
       </item>
-      <item row="6" column="0">
+      <item row="9" column="0">
        <widget class="QLabel" name="label_7">
         <property name="font">
          <font>
@@ -443,7 +647,7 @@
         </property>
        </widget>
       </item>
-      <item row="6" column="1">
+      <item row="9" column="1">
        <widget class="QDateTimeEdit" name="dateTimeEdit_stop_time">
         <property name="font">
          <font>
@@ -456,11 +660,11 @@
          </font>
         </property>
         <property name="displayFormat">
-         <string>yyyy/M/d HH:mm:ss</string>
+         <string>yyyy-MM-dd HH:mm:ss</string>
         </property>
        </widget>
       </item>
-      <item row="7" column="0">
+      <item row="10" column="0">
        <widget class="QLabel" name="label_8">
         <property name="font">
          <font>
@@ -479,11 +683,11 @@
          <locale language="Chinese" country="China"/>
         </property>
         <property name="text">
-         <string>rtsp鉴权</string>
+         <string>rtsp_info</string>
         </property>
        </widget>
       </item>
-      <item row="7" column="1">
+      <item row="10" column="1">
        <widget class="QComboBox" name="comboBox_rtsp">
         <property name="font">
          <font>
@@ -507,29 +711,6 @@
         </item>
        </widget>
       </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="label_5">
-        <property name="font">
-         <font>
-          <family>Times New Roman</family>
-          <pointsize>10</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
-          <strikeout>false</strikeout>
-          <kerning>true</kerning>
-         </font>
-        </property>
-        <property name="layoutDirection">
-         <enum>Qt::RightToLeft</enum>
-        </property>
-        <property name="locale">
-         <locale language="Chinese" country="China"/>
-        </property>
-        <property name="text">
-         <string>env</string>
-        </property>
-       </widget>
-      </item>
      </layout>
     </item>
     <item>
@@ -551,6 +732,23 @@
         </property>
        </widget>
       </item>
+      <item row="2" column="0">
+       <widget class="QPushButton" name="pushButton_7">
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+          <strikeout>false</strikeout>
+          <kerning>true</kerning>
+         </font>
+        </property>
+        <property name="text">
+         <string>PushButton</string>
+        </property>
+       </widget>
+      </item>
       <item row="1" column="0">
        <widget class="QPushButton" name="pushButton_Rtsp">
         <property name="font">
@@ -565,6 +763,23 @@
         </property>
         <property name="text">
          <string>设置rtsp</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QPushButton" name="pushButton_9">
+        <property name="font">
+         <font>
+          <family>Times New Roman</family>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+          <strikeout>false</strikeout>
+          <kerning>true</kerning>
+         </font>
+        </property>
+        <property name="text">
+         <string>PushButton</string>
         </property>
        </widget>
       </item>
@@ -619,40 +834,6 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="0">
-       <widget class="QPushButton" name="pushButton_Live">
-        <property name="font">
-         <font>
-          <family>Times New Roman</family>
-          <pointsize>10</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
-          <strikeout>false</strikeout>
-          <kerning>true</kerning>
-         </font>
-        </property>
-        <property name="text">
-         <string>获取实况</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QPushButton" name="pushButton_7">
-        <property name="font">
-         <font>
-          <family>Times New Roman</family>
-          <pointsize>10</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
-          <strikeout>false</strikeout>
-          <kerning>true</kerning>
-         </font>
-        </property>
-        <property name="text">
-         <string>PushButton</string>
-        </property>
-       </widget>
-      </item>
       <item row="2" column="1">
        <widget class="QPushButton" name="pushButton_8">
         <property name="font">
@@ -670,8 +851,8 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="2">
-       <widget class="QPushButton" name="pushButton_9">
+      <item row="0" column="0">
+       <widget class="QPushButton" name="pushButton_Live">
         <property name="font">
          <font>
           <family>Times New Roman</family>
@@ -683,7 +864,7 @@
          </font>
         </property>
         <property name="text">
-         <string>PushButton</string>
+         <string>获取实况</string>
         </property>
        </widget>
       </item>
