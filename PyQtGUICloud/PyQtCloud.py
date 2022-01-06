@@ -15,9 +15,9 @@ class Cloud():
     def __init__(self,*args,**kwargs):
         print("args,kwargs",args,kwargs)
         self.PyQtGUIInfo = kwargs.get("PyQtGUIInfo","PyQtGUIInfo为空")
-        print(self.PyQtGUIInfo)
+        self.PyQtGUIInfo = json.dumps(self.PyQtGUIInfo, indent=4, sort_keys=False, ensure_ascii=False)
     def getEnv(self):
-        env=self.PyQtGUIInfo['env']
+        env=self.PyQtGUIInfo
         return env
 
 

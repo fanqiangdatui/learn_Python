@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 import sys
 #PyQt5中使用的基本控件都在PyQt5.QtWidgets模块中
 from PyQt5.QtWidgets import QApplication, QMainWindow
@@ -33,7 +34,8 @@ class CloudMainForm(QMainWindow, Ui_Form):
     def GetNorthToken(self):
         #利用line Edit控件对象text()函数获取界面输入
         env=PyQtCloud.Cloud(PyQtGUIInfo=self.PyQtGUIInfo).getEnv()
-        self.textEdit.setText(env)
+        print("env",env,"envtype",type(env))
+        self.textBrowser.setText(env)
 
 
 if __name__ == "__main__":
