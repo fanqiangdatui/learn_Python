@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtCore import QDateTime
 #导入designer工具生成的login模块
 from PyQtCloudGUI import Ui_Form
-import cloud
+import PyQtCloud
 
 class CloudMainForm(QMainWindow, Ui_Form):
     def __init__(self, parent=None):
@@ -15,7 +15,7 @@ class CloudMainForm(QMainWindow, Ui_Form):
         # self.pushButton_Live.clicked.connect(self.GetNorthToken)
         self.dateTimeEdit_start_time.setDateTime(QDateTime.currentDateTime().addDays(1))
         self.dateTimeEdit_stop_time.setDateTime(QDateTime.currentDateTime().addDays(-1))
-        self.PyQtGUIInfo = {"env":self.comboBox_env.currentText(),
+        PyQtGUIInfo = {"env":self.comboBox_env.currentText(),
                             "device_id":self.comboBox_device_id.currentText(),
                             "channel_id":self.comboBox_channel_id.currentText(),
                             "live_protocol":self.comboBox_live_protocol.currentText(),
@@ -27,13 +27,14 @@ class CloudMainForm(QMainWindow, Ui_Form):
                             "stop_time":self.dateTimeEdit_stop_time.text(),
                             "rtsp_info":self.comboBox_rtsp.currentText(),
                             }
+        self.PyQtGUIInfo=PyQtGUIInfo
         self.pushButton_Live.clicked.connect(self.GetNorthToken)
 
     def GetNorthToken(self):
         #利用line Edit控件对象text()函数获取界面输入
-        self.textEdit.setText(cloud.CLOUD().GetToken(self.comboBox_env.currentText()))
-        # print(self.comboBox_env.currentText())
-        print(self.PyQtGUIInfo)
+        env=PyQtCloud.Cloud(PyQtGUIInfo=self.PyQtGUIInfo).getEnv()
+        self.textEdit.setText(env)
+
 
 if __name__ == "__main__":
     #固定的，PyQt5程序都需要QApplication对象。sys.argv是命令行参数列表，确保程序可以双击运行
