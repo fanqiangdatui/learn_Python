@@ -12,8 +12,8 @@ from sdc import SDC
 w = tk.Tk()  # 实例化object，建立窗口w
 w.wm_attributes('-topmost',1)
 w.title('wx696291')  # 给窗口起名字
-wh="320x470"
-w.geometry(wh+'+0+500')  # 设定窗口大小
+wh="320x510"
+w.geometry(wh+'+0+400')  # 设定窗口大小
 note = ttk.Notebook()
 note.place(relx=0,rely=0)
 
@@ -276,6 +276,19 @@ sd = ttk.Button(frameSDC, text="修改ip", command=tksetsdcip)
 sd.grid(row=4, columnspan=4,sticky=tk.E + tk.W, padx=3, pady=3)
 
 
+varca0 = tk.StringVar()
+Entry_ca0 = tk.Entry(frameCloud, textvariable=varca0)
+Entry_ca0.grid(row=6, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
+varca0.set("18126017824")
+ca0 = tk.Label(frameCloud, text='用户名:',height=1,width=18,anchor='ne')
+ca0.grid(row=6, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
+
+varca01 = tk.StringVar()
+Entry_ca01 = tk.Entry(frameCloud, textvariable=varca01)
+Entry_ca01.grid(row=7, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
+varca01.set("Qaz12580")
+ca01 = tk.Label(frameCloud, text='密码:',height=1,width=18,anchor='ne')
+ca01.grid(row=7, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
 varca = tk.StringVar()
 Entry_ca = tk.Entry(frameCloud, textvariable=varca)
@@ -360,7 +373,7 @@ dj.grid(row=22, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
 vardk = tk.StringVar()
 Entry_dk = ttk.Combobox(frameCloud, width=12,textvariable=vardk,font=('微软雅黑', 8))
-Entry_dk['values']=("13709641419,Qaz12580,MD5","13709641419,Qaz12580,SHA256")
+Entry_dk['values']=("MD5","SHA256")
 Entry_dk.grid(row=24, column=1,sticky=tk.E + tk.W,padx=3, pady=3)
 Entry_dk.current("0")
 
@@ -376,12 +389,16 @@ def GetHLS():
     channel_id=Entry_df.get()
     live_protocol=Entry_de.get()
     stream_type=Entry_cd.get()
+    account = Entry_ca0.get()
+    password = Entry_ca01.get()
     channels=[
         {
             "device_id": device_id,
             "channel_id": channel_id,
             "live_protocol": live_protocol,
-            "stream_type": stream_type
+            "stream_type": stream_type,
+            "account":account,
+            "password":password
         }
     ]
     res = cloud.CLOUD().GetHLSURL(Entry_dc.get(),channels)
@@ -400,6 +417,8 @@ def GetPlayBackHLS():
     end_time=Entry_di.get()
     infos = vardk.get()
     record_type = vardj.get()
+    account = Entry_ca0.get()
+    password = Entry_ca01.get()
     channels=[
         {
             "device_id": device_id,
@@ -407,7 +426,9 @@ def GetPlayBackHLS():
             "playback_protocol": playback_protocol,
             "start_time":urllib.parse.quote(start_time),
             "end_time":urllib.parse.quote(end_time),
-            "record_type":record_type
+            "record_type":record_type,
+            "account": account,
+            "password": password
         }
     ]
     res = cloud.CLOUD().GetPlayBackHLSURL(Entry_dc.get(),channels,infos)
@@ -427,6 +448,8 @@ def GetCloudReList():
     live_protocol = Entry_de.get()
     start_time = Entry_dh.get()
     end_time = Entry_di.get()
+    account = Entry_ca0.get()
+    password = Entry_ca01.get()
     channels = [
         {
             "device_id": device_id,
@@ -434,7 +457,9 @@ def GetCloudReList():
             "record_type": record_type,
             "live_protocol": live_protocol,
             "start_time": urllib.parse.quote(start_time),
-            "end_time": urllib.parse.quote(end_time)
+            "end_time": urllib.parse.quote(end_time),
+            "account": account,
+            "password": password
         }
     ]
     res = cloud.CLOUD().GetCloudReList(Entry_dc.get(), channels)
@@ -444,8 +469,19 @@ cf = ttk.Button(frameCloud, text="获取录像列表", command=GetCloudReList)
 cf.grid(row=23, columnspan=4,sticky=tk.E + tk.W, padx=3, pady=3)
 
 def setrtspinfo():
-    infos = vardk.get()
-    res = cloud.CLOUD().rtspinfo(Entry_dc.get(), infos)
+    account = Entry_ca0.get()
+    password = Entry_ca01.get()
+    channels = [
+        {
+            "account": account,
+            "password": password
+        }
+    ]
+    media_name = account
+    media_password = password
+    auth_type = vardk.get()
+    infos = ",".join([media_name,media_password,auth_type])
+    res = cloud.CLOUD().rtspinfo(Entry_dc.get(), infos,channels)
     varca.set(res)
 cg = ttk.Button(frameCloud, text="设置rtsp鉴权信息", command=setrtspinfo)
 cg.grid(row=24, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
@@ -453,10 +489,14 @@ cg.grid(row=24, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 def getstream_ability():
     device_id=getdevice_id()
     channel_id=Entry_df.get()
+    account = Entry_ca0.get()
+    password = Entry_ca01.get()
     channels=[
         {
             "device_id": device_id,
-            "channel_id": channel_id
+            "channel_id": channel_id,
+            "account": account,
+            "password": password
         }
     ]
     res = cloud.CLOUD().getstream_ability(Entry_dc.get(),channels)
@@ -466,7 +506,15 @@ ch = ttk.Button(frameCloud, text="码流能力集", command=getstream_ability)
 ch.grid(row=25, column=0,sticky=tk.E + tk.W, padx=3, pady=3)
 
 def setRecordPlan():
-    res = cloud.CLOUD().setRecordPlan(Entry_dc.get())
+    account = Entry_ca0.get()
+    password = Entry_ca01.get()
+    channels = [
+        {
+            "account": account,
+            "password": password
+        }
+    ]
+    res = cloud.CLOUD().setRecordPlan(Entry_dc.get(),channels)
     Textea.delete("1.0", tk.END)
     Textea.insert("1.0", res)
 cg = ttk.Button(frameCloud, text="设置计划", command=setRecordPlan)

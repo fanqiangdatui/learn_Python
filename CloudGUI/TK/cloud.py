@@ -68,10 +68,12 @@ env={"北京四":{"ak": "fe46ddffe424132f5e35bd46d8080538",
      }
 class CLOUD():
 
-    def GetToken(self,envType):
+    def GetToken(self,envType,channels):
         data={
         "ak": env[envType]["ak"],
         "sk": env[envType]["sk"]}
+        user_id = CLOUD().GetUserId(envType,channels)
+        env[envType]["userid"] = user_id
         url=env[envType]["eudms"]+"/v1/"+env[envType]["userid"]+"/enterprises/access-token"
         response=requests.post(url,json=data,verify=False)
         responsetext = json.loads(response.text)
@@ -80,27 +82,30 @@ class CLOUD():
         access_token = responsetext['access_token']
         print(access_token)
         return access_token
-    def GetAppToken(self,envType):
-        data={
-	"account":"13709641419",
-	"password":"Qaz12580",
-	"app_lan":"zh-CN",
-	"app_version":"1.0.0.1.20190101",
-	"app_type":0
-}
-        url=env[envType]["umsip"]+"/v1/ums/login"
-        response=requests.post(url,json=data,verify=False)
+
+    def GetUserId(self,envType,channels):
+        data = {
+            "account": channels[0]['account'],
+            "password": channels[0]['password'],
+            "app_lan": "zh-CN",
+            "app_version": "1.0.0.1.20190101",
+            "app_type": 2
+        }
+        url = env[envType]["umsip"] + "/v2/eums/login"
+        response = requests.post(url, json=data, verify=False)
         responsetext = json.loads(response.text)
         jr = json.dumps(json.loads(response.text), indent=4, sort_keys=False, ensure_ascii=False)
-        print('************GetAppToken-json.dumps.response.text:', jr, type(jr), type(responsetext))
-        access_token = responsetext['data']["token"]
-        print(access_token)
-        return access_token
+        print('************GetUserId-json.dumps.response.text:', jr, type(jr), type(responsetext))
+        user_id = responsetext['data']["user_id"]
+        print('userid:',user_id)
+        return user_id
+
     def GetHLSURL(self,envType,channels):
-        access_token=CLOUD().GetToken(envType)
+        access_token=CLOUD().GetToken(envType,channels)
 
         url = env[envType]["eudms"]+"/v1/"+env[envType]["userid"]+"/devices/channels/cloud-live/url"
         isstatic=0
+        print("url:",url)
         if "static" in channels[0]['live_protocol']:
             isstatic=1
             channels[0]['live_protocol'] = channels[0]['live_protocol'].split(",")[0]
@@ -121,7 +126,7 @@ class CLOUD():
         if responsetext["channels"][0]["result"]["msg"]== "Success":
             HLSURL = responsetext["channels"][0]["live_url"]
             if isstatic==1:
-                HLSURL="rtsp://13709641419:Qaz12580@"+HLSURL[7:]
+                HLSURL="rtsp://"+channels[0]['account']+":"+channels[0]['password']+"@"+HLSURL[7:]
         else:
             HLSURL = responsetext["channels"][0]["result"]["msg"]
 
@@ -166,7 +171,7 @@ class CLOUD():
         HLSHTMLfile.close()
 
     def GetPlayBackHLSURL(self,envType,channels,infos):
-        access_token=CLOUD().GetToken(envType)
+        access_token=CLOUD().GetToken(envType,channels)
         device_id=channels[0]["device_id"]
         channel_id = channels[0]["channel_id"]
         playback_protocol = channels[0]["playback_protocol"]
@@ -193,7 +198,7 @@ class CLOUD():
         print('************json.dumps.response.text:', jr, type(jr), type(responsetext))
         PlayBackHLSURL = responsetext.get("playback_url",responsetext)
         if "static" in playback_protocol and "playback_url" in responsetext:
-            PlayBackHLSURL = "rtsp://%s:%s@"%(infos.split(",")[0],infos.split(",")[1]) + PlayBackHLSURL[7:]
+            PlayBackHLSURL = "rtsp://"+channels[0]['account']+":"+channels[0]['password']+"@" + PlayBackHLSURL[7:]
         print(PlayBackHLSURL)
         return PlayBackHLSURL
 
@@ -235,7 +240,7 @@ class CLOUD():
         HLSHTMLfile.close()
 
     def GetCloudReList(self,envType,channels):
-        access_token = CLOUD().GetToken(envType)
+        access_token = CLOUD().GetToken(envType,channels)
         device_id = channels[0]["device_id"]
         channel_id = channels[0]["channel_id"]
         record_type = channels[0]["record_type"]
@@ -263,8 +268,8 @@ class CLOUD():
         print(GetCloudReList)
         return GetCloudReList
 
-    def rtspinfo(self,envType,infos):
-        access_token=CLOUD().GetToken(envType)
+    def rtspinfo(self,envType,infos,channels):
+        access_token=CLOUD().GetToken(envType,channels)
         url = env[envType]["apig"]+"/v1/"+env[envType]["userid"]+"/media/connection-info"
 
         payload = json.dumps({
@@ -285,7 +290,7 @@ class CLOUD():
         return responsetext
 
     def getstream_ability(self,envType,channels):
-        access_token=CLOUD().GetToken(envType)
+        access_token=CLOUD().GetToken(envType,channels)
         device_id=channels[0]["device_id"]
         channel_id = channels[0]["channel_id"]
         url = env[envType]["dmajavaip"] + "/v1/" + env[envType][
@@ -330,8 +335,8 @@ class CLOUD():
             print(devlist)
             return devlist
 
-    def setRecordPlan(self,envType):
-        access_token=CLOUD().GetToken(envType)
+    def setRecordPlan(self,envType,channels):
+        access_token=CLOUD().GetToken(envType,channels)
         url = env[envType]["eudms"]+"/v1/"+env[envType]["userid"]+"/devices/channels/record-plan"
         payload = json.dumps(CLOUD().getCloudDevlist())
         headers = {
