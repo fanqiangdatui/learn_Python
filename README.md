@@ -11,3 +11,6 @@ C:\ProgramData\Anaconda3\envs\learn_Python\python.exe
 $FileDir$
 
 git reset --hard origin/master
+
+C:\Users\linshengxin\anaconda3\envs\learn_Python\Lib\site-packages\qt5_applications\Qt\bin\designer.exe
+C:\Users\linshengxin\anaconda3\envs\learn_Python\python.exe
