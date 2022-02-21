@@ -17,7 +17,7 @@ env={"北京四":{"ak": "fe46ddffe424132f5e35bd46d8080538",
             "apig": "https://api-ivm.myhuaweicloud.com",
             "dmajavaip":"https://api-ivm.myhuaweicloud.com",
             "enterprise_id": "5669365720200916104630",
-            "umsip":"https://application.holisens.huawei.com"
+            "umsip":"https://application.holosens.huawei.com"
             },
      "上海一":{"ak": "4b27b3ec81cea99447106be3d1450fee",
             "sk": "bfdd39fc865d936728aeab90508af2e7bcccfd380d7bf73a23c4a3545a07295a",
