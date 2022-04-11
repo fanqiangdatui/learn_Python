@@ -2,7 +2,8 @@ pip install urllib3 requests requests_toolbelt openpyxl paramiko pyinstaller pyq
 
 QTDesigner
 C:\ProgramData\Anaconda3\envs\learn_Python\Lib\site-packages\qt5_applications\Qt\bin\designer.exe
-$FileDir$\$FileName$
+$FileDir$
+$FileName$
 $FileDir$ 
 
 PyUIC
